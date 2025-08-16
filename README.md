@@ -1,36 +1,211 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Tiny URL Frontend
+
+A modern Next.js frontend application for the Tiny URL service, featuring user authentication, short URL creation, and detailed analytics.
+
+## Features
+
+- 🚀 **Modern Next.js 15** with App Router
+- 🔐 **User Authentication** - Sign up, sign in, and secure sessions
+- 🔗 **URL Shortening** - Create short, shareable links
+- 📊 **Analytics Dashboard** - Track clicks and performance metrics
+- 🎨 **Beautiful UI** - Built with Tailwind CSS and modern design principles
+- 📱 **Responsive Design** - Works perfectly on all devices
+- 🔒 **Secure** - JWT-based authentication with proper middleware
+
+## Tech Stack
+
+- **Framework**: Next.js 15 (App Router)
+- **Language**: TypeScript
+- **Styling**: Tailwind CSS
+- **Forms**: React Hook Form + Zod validation
+- **Charts**: Recharts for analytics visualization
+- **Icons**: Lucide React
+- **HTTP Client**: Axios with interceptors
+
+## Prerequisites
+
+- Node.js 18+ 
+- npm or yarn
+- Backend API running (Tiny URL Backend)
 
 ## Getting Started
 
-First, run the development server:
+### 1. Clone and Install
+
+```bash
+cd tiny-url-frontend
+npm install
+```
+
+### 2. Environment Configuration
+
+Create a `.env.local` file in the root directory:
+
+```env
+NEXT_PUBLIC_API_URL=http://localhost:3000/api/v1
+```
+
+**Note**: Make sure your backend is running on port 3000, or update the URL accordingly.
+
+### 3. Run the Development Server
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3001](http://localhost:3001) in your browser.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Project Structure
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```
+src/
+├── app/                    # Next.js App Router pages
+│   ├── dashboard/         # Dashboard routes
+│   ├── login/            # Authentication pages
+│   ├── signup/           # Sign up page
+│   ├── globals.css       # Global styles
+│   ├── layout.tsx        # Root layout
+│   └── page.tsx          # Landing page
+├── components/            # Reusable components
+│   ├── auth/             # Authentication components
+│   ├── dashboard/        # Dashboard components
+│   ├── metrics/          # Analytics components
+│   ├── url/              # URL management components
+│   └── ui/               # Base UI components
+├── lib/                  # Utility libraries
+│   ├── api.ts            # API client configuration
+│   ├── auth.ts           # Authentication service
+│   ├── url.ts            # URL service
+│   └── utils.ts          # Utility functions
+└── types/                # TypeScript type definitions
+    └── index.ts          # Main type definitions
+```
 
-## Learn More
+## API Integration
 
-To learn more about Next.js, take a look at the following resources:
+The frontend integrates with the Tiny URL Backend API:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- **Authentication**: `/api/v1/auth/signin`, `/api/v1/auth/signup`
+- **URL Management**: `/api/v1/urls` (CRUD operations)
+- **URL Redirection**: `/:shortUrl` (public redirect endpoint)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Key Components
 
-## Deploy on Vercel
+### Authentication
+- `LoginForm` - User sign-in with email/password
+- `SignupForm` - User registration with validation
+- `authService` - Authentication logic and token management
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### URL Management
+- `CreateUrlForm` - Form to create new short URLs
+- `UrlList` - Display and manage existing URLs
+- `urlService` - API calls for URL operations
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Analytics
+- `MetricsDashboard` - Charts and statistics visualization
+- Click tracking and performance metrics
+- Interactive charts using Recharts
+
+### Dashboard
+- `DashboardNav` - Top navigation with user info
+- `DashboardSidebar` - Left sidebar navigation
+- Responsive layout for all screen sizes
+
+## Features in Detail
+
+### 1. User Authentication
+- Secure JWT-based authentication
+- Protected routes with middleware
+- Automatic token refresh handling
+- Secure logout functionality
+
+### 2. URL Shortening
+- Input validation with Zod schemas
+- Instant short URL generation
+- Copy-to-clipboard functionality
+- URL testing and management
+
+### 3. Analytics & Metrics
+- Real-time click tracking
+- Performance visualization
+- Bar charts and pie charts
+- Recent activity monitoring
+
+### 4. Responsive Design
+- Mobile-first approach
+- Tailwind CSS utility classes
+- Consistent design system
+- Accessibility considerations
+
+## Development
+
+### Code Quality
+- TypeScript for type safety
+- ESLint for code linting
+- Prettier for code formatting
+- Component-based architecture
+
+### State Management
+- React hooks for local state
+- Context API for global state (if needed)
+- Server-side data fetching
+- Optimistic updates
+
+### Performance
+- Next.js App Router optimizations
+- Image optimization
+- Code splitting
+- Lazy loading where appropriate
+
+## Deployment
+
+### Build for Production
+
+```bash
+npm run build
+```
+
+### Environment Variables for Production
+
+```env
+NEXT_PUBLIC_API_URL=https://your-api-domain.com/api/v1
+```
+
+### Deployment Platforms
+
+- **Vercel** (Recommended for Next.js)
+- **Netlify**
+- **AWS Amplify**
+- **Self-hosted**
+
+## Contributing
+
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Add tests if applicable
+5. Submit a pull request
+
+## License
+
+This project is licensed under the MIT License.
+
+## Support
+
+For support and questions:
+- Check the documentation
+- Open an issue on GitHub
+- Contact the development team
+
+## Backend Requirements
+
+Make sure your Tiny URL Backend is running and includes:
+- User authentication endpoints
+- URL CRUD operations
+- Click tracking functionality
+- CORS enabled for frontend domain
+- JWT token validation
+
+---
+
+Built with ❤️ using Next.js and modern web technologies.
